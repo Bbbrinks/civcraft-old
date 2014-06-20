@@ -1,11 +1,13 @@
 package bob.civvy;
 
+import bob.civvy.events.listners.SpawnCivviesEventListner;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import net.minecraft.init.Blocks;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import org.apache.logging.log4j.Logger;
@@ -37,11 +39,10 @@ public class CivvyMod
     {
         logger.info("Init");
         removeRecipes(CraftingManager.getInstance());
-		// some example code
-        System.out.println("DIRT BLOCK >> "+Blocks.dirt.getUnlocalizedName());
-
-
+        FMLCommonHandler.instance().bus().register(new SpawnCivviesEventListner());
     }
+
+    @SubscribeEvent
 
 
 /*
