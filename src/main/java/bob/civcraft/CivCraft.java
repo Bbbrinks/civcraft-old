@@ -1,6 +1,9 @@
-package bob.civvy;
+package bob.civcraft;
 
-import bob.civvy.events.listners.SpawnCivviesEventListner;
+import bob.civcraft.blocks.CivCraftBlocks;
+import bob.civcraft.blocks.DropReplacer;
+import bob.civcraft.events.listners.SpawnCivviesEventListner;
+import bob.civcraft.items.CivCraftItems;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -8,30 +11,38 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-@Mod(modid = CivvyMod.MODID, version = CivvyMod.VERSION)
-public class CivvyMod
+@Mod(modid = CivCraft.MODID, version = CivCraft.VERSION)
+public class CivCraft
 {
-    public static final String MODID = "civvy";
+    public static final String MODID = "civcraft";
     public static final String VERSION = "0.0.0";
     private Logger logger;
 
-    @Mod.Instance(value = CivvyMod.MODID)
-    public static CivvyMod instance;
+    @Mod.Instance(value = CivCraft.MODID)
+    public static CivCraft instance;
 
-    @SidedProxy(clientSide="tutorial.generic.client.ClientProxy", serverSide="tutorial.generic.CommonProxy")
+    @SidedProxy(clientSide="bob.civcraft.client.ClientProxy", serverSide="bob.civcraft.CommonProxy")
     public static CommonProxy proxy;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event){
         logger = event.getModLog();
-
         logger.info("Preinit");
+
+        GameRegistry.registerBlock(CivCraftBlocks.fallingDirt, CivCraftBlocks.fallingDirt.getUnlocalizedName());
+        GameRegistry.registerItem(CivCraftItems.branch, CivCraftItems.branch.getUnlocalizedName());
+
+
     }
     
     @EventHandler
@@ -39,7 +50,10 @@ public class CivvyMod
     {
         logger.info("Init");
         removeRecipes(CraftingManager.getInstance());
+        GameRegistry.addShapelessRecipe(new ItemStack(Items.stick, 2), new ItemStack(CivCraftItems.branch), new ItemStack(Items.flint));
         FMLCommonHandler.instance().bus().register(new SpawnCivviesEventListner());
+        FMLCommonHandler.instance().bus().register(new DropReplacer());
+        MinecraftForge.EVENT_BUS.register(new DropReplacer());
     }
 
     @SubscribeEvent

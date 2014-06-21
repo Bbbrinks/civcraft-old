@@ -1,6 +1,6 @@
-package bob.civvy.client;
+package bob.civcraft.client;
 
-import bob.civvy.CommonProxy;
+import bob.civcraft.CommonProxy;
 
 /**
  * Created by bob on 20-6-2014.

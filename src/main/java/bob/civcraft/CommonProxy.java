@@ -1,4 +1,4 @@
-package bob.civvy;
+package bob.civcraft;
 
 /**
  * Created by bob on 20-6-2014.

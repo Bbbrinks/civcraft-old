@@ -1,4 +1,4 @@
-package bob.civvy.entities;
+package bob.civcraft.entities;
 
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.world.World;
