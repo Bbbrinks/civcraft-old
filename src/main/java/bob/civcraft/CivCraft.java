@@ -2,6 +2,7 @@ package bob.civcraft;
 
 import bob.civcraft.blocks.CivCraftBlocks;
 import bob.civcraft.blocks.DropReplacer;
+import bob.civcraft.entities.Civvy;
 import bob.civcraft.events.listners.SpawnCivviesEventListener;
 import bob.civcraft.items.CivCraftItems;
 import cpw.mods.fml.common.Mod;
@@ -10,6 +11,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -40,7 +42,7 @@ public class CivCraft
 
         GameRegistry.registerBlock(CivCraftBlocks.fallingDirt, CivCraftBlocks.fallingDirt.getUnlocalizedName());
         GameRegistry.registerItem(CivCraftItems.branch, CivCraftItems.branch.getUnlocalizedName());
-
+        EntityRegistry.registerGlobalEntityID(Civvy.class, "Civvy",  EntityRegistry.findGlobalUniqueEntityId());
 
     }
     
