@@ -12,10 +12,11 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 /**
  * Created by bob on 20-6-2014.
  */
-public class SpawnCivviesEventListner {
+public class SpawnCivviesEventListener {
 
     @SubscribeEvent
-    public void handleEvent(EntityJoinWorldEvent event) {
+   // @SideOnly(Side.SERVER)
+    public void playerJoinsFirstTimeHandler(EntityJoinWorldEvent event) {
         if (event.entity instanceof EntityPlayerMP) {
             EntityPlayerMP player = (EntityPlayerMP)event.entity;
 

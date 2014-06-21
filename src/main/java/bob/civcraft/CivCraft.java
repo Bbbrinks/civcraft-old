@@ -2,9 +2,8 @@ package bob.civcraft;
 
 import bob.civcraft.blocks.CivCraftBlocks;
 import bob.civcraft.blocks.DropReplacer;
-import bob.civcraft.events.listners.SpawnCivviesEventListner;
+import bob.civcraft.events.listners.SpawnCivviesEventListener;
 import bob.civcraft.items.CivCraftItems;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -51,8 +50,7 @@ public class CivCraft
         logger.info("Init");
         removeRecipes(CraftingManager.getInstance());
         GameRegistry.addShapelessRecipe(new ItemStack(Items.stick, 2), new ItemStack(CivCraftItems.branch), new ItemStack(Items.flint));
-        FMLCommonHandler.instance().bus().register(new SpawnCivviesEventListner());
-        FMLCommonHandler.instance().bus().register(new DropReplacer());
+        MinecraftForge.EVENT_BUS.register(new SpawnCivviesEventListener());
         MinecraftForge.EVENT_BUS.register(new DropReplacer());
     }
 
